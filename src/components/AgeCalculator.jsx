@@ -5,7 +5,6 @@ import styles from "../styles/AgeCalculator.module.css";
 
 function AgeCalculator() {
   const [birthdate, setBirthdate] = useState("");
-  const currentDate = new Date();
   const [age, setAge] = useState({
     years: 0,
     months: 0,
@@ -16,11 +15,12 @@ function AgeCalculator() {
     seconds: 0,
     milliseconds: 0,
   });
+  const birthdateObj = new Date(birthdate);
 
   useEffect(() => {
-    if (birthdate) {
-      const birthdateObj = new Date(birthdate);
+    const currentDate = new Date();
 
+    if (birthdate) {
       const timeDifference = currentDate - birthdateObj;
 
       const years = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
@@ -43,7 +43,7 @@ function AgeCalculator() {
         milliseconds,
       });
     }
-  }, [currentDate]);
+  }, [birthdate]);
 
   return (
     <div className={styles.container}>
